@@ -103,8 +103,9 @@ private:
 
 		if (enableValidationLayers)
 		{
-			createInfo.enabledLayerCount = static_cast<uint32_t>(validantionLayers.size());
-			createInfo.ppEnabledLayerNames = validantionLayers.data();
+			createInfo.enabledLayerCount = 0;
+			//createInfo.enabledLayerCount = static_cast<uint32_t>(validantionLayers.size());
+			//createInfo.ppEnabledLayerNames = validantionLayers.data();
 		}
 		else
 		{
@@ -120,6 +121,14 @@ private:
 		createInfo.ppEnabledExtensionNames = glfwExtensions;
 		createInfo.ppEnabledLayerNames = 0;
 
+		
+
+
+		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create instance!");
+		}
+
 		uint32_t extensionCount = 0;
 		vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
 
@@ -133,13 +142,6 @@ private:
 		{
 			std::cout << '\t' << extension.extensionName << '\n';
 		}
-
-
-		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
-		{
-			throw std::runtime_error("failed to create instance!");
-		}
-
 
 	}
 
