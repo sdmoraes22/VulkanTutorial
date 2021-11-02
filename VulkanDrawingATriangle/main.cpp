@@ -103,9 +103,8 @@ private:
 
 		if (enableValidationLayers)
 		{
-			createInfo.enabledLayerCount = 0;
-			//createInfo.enabledLayerCount = static_cast<uint32_t>(validantionLayers.size());
-			//createInfo.ppEnabledLayerNames = validantionLayers.data();
+			createInfo.enabledLayerCount = static_cast<uint32_t>(validantionLayers.size());
+			createInfo.ppEnabledLayerNames = validantionLayers.data();
 		}
 		else
 		{
@@ -119,10 +118,6 @@ private:
 
 		createInfo.enabledExtensionCount = glfwExtensionCount;
 		createInfo.ppEnabledExtensionNames = glfwExtensions;
-		createInfo.ppEnabledLayerNames = 0;
-
-		
-
 
 		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
 		{
